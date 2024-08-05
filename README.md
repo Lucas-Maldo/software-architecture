@@ -24,8 +24,22 @@ py manage.py runserver
 ```
 ## Local URL:
 ```
+python manage.py migrate
+```
+
+## Apply migrations:
+```
 http://127.0.0.1:8000/
 ```
 
-Progress:
+## Users:
+Superuser:
+```
+user: admin
+mail: admin@gmail.com
+password: administrador
+```
+
+
+## Progress:
 - [ ] add postgresql
