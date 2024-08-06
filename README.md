@@ -39,7 +39,19 @@ user: admin
 mail: admin@gmail.com
 password: administrador
 ```
-
+## DB info:
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Review_app_db',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
+        'HOST': 'localhost',  # Set to 'localhost' or an IP address if the DB is remote
+        'PORT': '5432',  # Default is '5432'
+    }
+}
+```
 
 ## Progress:
-- [ ] add postgresql
+- [X] add postgresql
