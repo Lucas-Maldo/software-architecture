@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Author Entry</title>
+</head>
+<body>
+    <h2>Author Entry Form</h2>
+    <form method="post" action="{% url 'authors:process_author_addition' %}">
+        {% csrf_token %}
+        <label for="name">Author name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label for="date_birth">Date of birth:</label>
+        <input type="date" name="date_birth" required>
+        <br>
+        <label for="origin_country">Country of origin:</label>
+        <input type="text" name="origin_country" required>
+        <br>
+        <label for="description">Shrt description:</label>
+        <input type="text" name="description" required>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
