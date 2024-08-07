@@ -1,9 +1,11 @@
+<a href="{% url 'authors:author_create' %}">Add New Author</a>
 {% if authors_list %}
     <ul>
     {% for author in authors_list %}
-    <li><a href="{% url 'authors:detail' author.id %}">{{ author.name }}</a></li>
+    <li><a href="{% url 'authors:author_detail' author.id %}">{{ author.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+

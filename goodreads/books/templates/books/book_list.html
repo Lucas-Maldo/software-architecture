@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Books</title>
+</head>
+<body>
+    <h1>Books:</h1>
+    <a href="{% url 'books:book_create' %}">Add New Book</a>
+
+    {% if authors_list %}
+    <ul>
+        {% for book in books %}
+            <li>
+                <a href="{% url 'books:book_detail' book.id %}">{{ book.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No polls are available.</p>
+    {% endif %}
+
+</body>
+</html>
+
+

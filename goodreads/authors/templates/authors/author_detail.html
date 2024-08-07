@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ author.name }}</title>
+</head>
+<body>
+    <h1>{{ author.name }}</h1>
+    <p>Birth Date: {{ author.date_birth }}</p>
+    <p>Country of Origin: {{ author.country_origin }}</p>
+    <p>Description: {{ author.description }}</p>
+    <a href="{% url 'authors:author_update' author.id %}">Edit</a>
+    <a href="{% url 'authors:author_delete' author.id %}">Delete</a>
+
+    <a href="{% url 'authors:index' %}">Back to list</a>
+</body>
+</html>

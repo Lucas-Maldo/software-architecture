@@ -13,7 +13,7 @@ class Book(models.Model):
 
 class Review(models.Model):
     id = models.BigAutoField(primary_key=True)
-    book = models.CharField(max_length=200)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     review = models.TextField()
     score = models.IntegerField()
     num_upvotes = models.IntegerField(default=0)
@@ -24,7 +24,8 @@ class Review(models.Model):
 
 class Sale(models.Model):
     id = models.BigAutoField(primary_key=True)
-    book = models.CharField(max_length=200)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    year = models.IntegerField(default=0)
     sales = models.IntegerField(default=0)
 
     def __str__(self):
