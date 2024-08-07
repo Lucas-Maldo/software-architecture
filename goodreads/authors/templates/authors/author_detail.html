@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ author.name }}</title>
-</head>
+  <title>{{ author.name }}</title>
+  <link rel="stylesheet" href="../../../static/css/styles.css">  </head>
 <body>
+  <div class="author-details">
     <h1>{{ author.name }}</h1>
-    <p>Birth Date: {{ author.date_birth }}</p>
-    <p>Country of Origin: {{ author.country_origin }}</p>
-    <p>Description: {{ author.description }}</p>
-    <a href="{% url 'authors:author_update' author.id %}">Edit</a>
-    <a href="{% url 'authors:author_delete' author.id %}">Delete</a>
+    <p><strong>Birth Date:</strong> {{ author.date_birth }}</p>
+    <p><strong>Country of Origin:</strong> {{ author.country_origin }}</p>
+    <p><strong>Description:</strong> {{ author.description }}</p>
+  </div>
 
-    <a href="{% url 'authors:index' %}">Back to list</a>
+  <div class="actions">
+    <a href="{% url 'authors:author_update' author.id %}" class="edit_btn">Edit</a>
+    <a href="{% url 'authors:author_delete' author.id %}" class="dlt_btn">Delete</a>
+  </div>
+
+  <a href="{% url 'authors:index' %}" class="back_to_list_btn">Back to list</a>
 </body>
 </html>

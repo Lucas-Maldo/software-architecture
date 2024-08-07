@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Books</title>
+    <title>Bookss</title>
+    <link rel="stylesheet" href="../../../static/css/styles.css">
 </head>
 <body>
-    <h1>Books:</h1>
-    <a href="{% url 'books:book_create' %}">Add New Book</a>
 
-    {% if authors_list %}
-    <ul>
-        {% for book in books %}
-            <li>
-                <a href="{% url 'books:book_detail' book.id %}">{{ book.name }}</a>
-            </li>
+    <h1>Books</h1>
+    
+    <table>
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>summary</th>
+        <th>date_of_pub</th>
+        <th>num_sales</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if books_list %}
+        {% for book in books_list %}
+            <tr>
+            <td>{{ book.id }}</td>
+            <td><a href="{% url 'books:book_detail' book.id %}">{{ book.name }}</a></td>
+            <td>{{ book.summary }}</td>
+            <td>{{ book.date_of_pub }}</td>
+            <td>{{ book.num_sales }}</td>
+            </tr>
         {% endfor %}
-    </ul>
-    {% else %}
-    <p>No polls are available.</p>
-    {% endif %}
+        {% else %}
+        <tr>
+            <td colspan="5">No books found.</td>
+        </tr>
+        {% endif %}
+    </tbody>
+    </table>
 
-</body>
-</html>
-
+    <a href="{% url 'books:book_create' %}" class="add_new_row_btn">Add New Book</a>
+</body> 
 

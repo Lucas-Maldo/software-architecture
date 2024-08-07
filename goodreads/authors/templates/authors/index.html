@@ -1,11 +1,33 @@
-<a href="{% url 'authors:author_create' %}">Add New Author</a>
-{% if authors_list %}
-    <ul>
-    {% for author in authors_list %}
-    <li><a href="{% url 'authors:author_detail' author.id %}">{{ author.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<h1>Authors</h1>
+<link rel="stylesheet" href="../../../static/css/styles.css">
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Date of Birth</th>
+      <th>Origin Country</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if authors_list %}
+      {% for author in authors_list %}
+        <tr>
+          <td>{{ author.id }}</td>
+          <td><a href="{% url 'authors:author_detail' author.id %}">{{ author.name }}</a></td>
+          <td>{{ author.date_birth }}</td>
+          <td>{{ author.origin_country }}</td>
+          <td>{{ author.description }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="5">No authors found.</td>
+      </tr>
+    {% endif %}
+  </tbody>
+</table>
+
+<a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
 

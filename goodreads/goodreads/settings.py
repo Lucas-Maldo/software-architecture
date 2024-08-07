@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Review_app_db',
         'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'password',
         'HOST': 'localhost',  # Set to 'localhost' or an IP address if the DB is remote
         'PORT': '5432',  # Default is '5432'
     }
@@ -128,3 +128,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'

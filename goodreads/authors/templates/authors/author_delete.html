@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete {{ author.name }}</title>
-</head>
+  <title>Delete {{ author.name }}</title>
+  <link rel="stylesheet" href="../../../static/css/styles.css">  </head>
 <body>
-    <h1>Delete {{ author.name }}</h1>
-    <p>Are you sure you want to delete "{{ author.name }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirm</button>
-    </form>
-    <a href="{% url 'authors:index' %}">Back to list</a>
+
+  <h1>Delete Confirmation</h1>
+  <p>Are you sure you want to delete<strong> {{ author.name }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="dlt_btn">Confirm</button>
+  </form>
+  <a href="{% url 'authors:index' %}" class="back_to_list_btn">Back to list</a>
+
 </body>
 </html>
+
