@@ -22,6 +22,12 @@ deactivate
 cd software-architecture/goodreads
 py manage.py runserver
 ```
+
+### if Css Not Working:
+```
+python manage.py collectstatic
+```
+
 ## Local URL:
 ```
 python manage.py migrate
