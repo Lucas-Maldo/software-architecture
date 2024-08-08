@@ -1,0 +1,5 @@
+django-seed
+django
+psycopg
+psycopg2
+psycopg_binary

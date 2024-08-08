@@ -82,8 +82,8 @@ DATABASES = {
         'NAME': 'Review_app_db',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'localhost',  # Set to 'localhost' or an IP address if the DB is remote
-        'PORT': '5432',  # Default is '5432'
+        'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
+        'PORT': '5433',  # Default is '5432'
     }
 }
 

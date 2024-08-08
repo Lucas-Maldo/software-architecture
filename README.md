@@ -28,12 +28,12 @@ py manage.py runserver
 python manage.py collectstatic
 ```
 
-## Local URL:
+## Apply migrations:
 ```
 python manage.py migrate
 ```
 
-## Apply migrations:
+## Local URL:
 ```
 http://127.0.0.1:8000/
 ```
