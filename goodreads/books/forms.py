@@ -13,4 +13,10 @@ class BookForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['book', 'review', 'score', 'num_upvotes']
+        fields = ['review', 'score', 'num_upvotes']
+
+    score = forms.IntegerField(
+        min_value=1,
+        max_value=5,
+        widget=forms.NumberInput(attrs={'placeholder': 'Enter a score between 1 and 5'})
+    )

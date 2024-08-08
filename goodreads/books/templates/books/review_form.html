@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Review for {{ book.name }}</title>
+</head>
+<body>
+    <h1>Create Review for "{{ book.name }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+    <a href="{% url 'books:book_detail' book.id %}">Cancel</a>
+</body>
+</html>

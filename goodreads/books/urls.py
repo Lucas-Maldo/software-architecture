@@ -10,4 +10,12 @@ urlpatterns = [
     path("new/", views.book_create, name="book_create"),
     path('edit/<int:id>/', views.book_update, name='book_update'),
     path('delete/<int:id>/', views.book_delete, name='book_delete'),
+
+    # path("review/new/", views.review_create, name="review_create"),
+    # path('review/edit/<int:id>/', views.review_update, name='review_update'),
+    # path('review/delete/<int:id>/', views.review_delete, name='review_delete'),
+
+    path('<int:id>/review/new/', views.review_create, name='review_create'),
+    path('<int:book_id>/review/<int:review_id>/edit/', views.review_update, name='review_update'),
+    path('<int:book_id>/review/<int:review_id>/delete/', views.review_delete, name='review_delete'),
 ]

@@ -12,7 +12,25 @@
     <p><strong>Summary:</strong> {{ book.summary }}</p>
   </div>
 
+  <h2>Reviews</h2>
+  <ul>
+      {% for review in reviews %}
+          <li>
+              <strong>Description: {{ review.review }}</strong> 
+              <p>
+              Score: {{ review.score }} 
+              <em>(Votes: {{ review.num_upvotes }})</em>
+              <a href="{% url 'books:review_update' book.id review.id %}" class="edit_btn">Edit</a>
+              <a href="{% url 'books:review_delete' book.id review.id %}" class="dlt_btn">Delete</a>
+            </p>
+          </li>
+      {% empty %}
+          <li>No reviews yet. Be the first to <a href="{% url 'books:review_create' book.id %}">add a review</a>.</li>
+      {% endfor %}
+  </ul>
+
   <div class="actions">
+    <a href="{% url 'books:review_create' book.id %}" class="edit_btn">Add a Review</a>
     <a href="{% url 'books:book_update' book.id %}" class="edit_btn">Edit</a>
     <a href="{% url 'books:book_delete' book.id %}" class="dlt_btn">Delete</a>
   </div>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete {{ author.name }}</title>
+</head>
+<body>
+    <h1>Delete {{ author.name }}</h1>
+    <p>Are you sure you want to delete "{{ review.review }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm</button>
+    </form>
+    <a href="{% url 'books:book_detail' book.id %}">Back to list</a>
+</body>
+</html>
