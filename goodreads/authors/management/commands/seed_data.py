@@ -53,7 +53,7 @@ class Command(BaseCommand):
                 'year': generate_unique_year(),
                 'sales': lambda x: seeder.faker.random_int(min=100, max=10000)
             })
-            book.num_sales = sum([sale.sales for sale in book.sale_set.all()])
+            book.num_sales = sum(sale.sales for sale in book.sales.all())
             book.save()
 
         inserted_pks = seeder.execute()
