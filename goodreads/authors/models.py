@@ -8,5 +8,5 @@ class Author(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return self.name + " " + self.description
+        return self.name
 

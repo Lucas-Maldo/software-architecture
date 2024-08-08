@@ -24,6 +24,7 @@ def book_create(request):
         form = BookForm()
     return render(request, 'books/book_form.html', {'form': form})
 
+
 def book_update(request, id):
     book = get_object_or_404(Book, pk=id)
     if request.method == "POST":
