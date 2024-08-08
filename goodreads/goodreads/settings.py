@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'homepage.apps.HomepageConfig',
     'authors.apps.AuthorsConfig',
     'books.apps.BooksConfig',
     'django.contrib.admin',
@@ -83,7 +84,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
-        'PORT': '5433',  # Default is '5432'
+        'PORT': '5432',  # Default is '5432'
     }
 }
 
