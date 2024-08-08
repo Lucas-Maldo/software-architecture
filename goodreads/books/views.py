@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Sum, F, Window
+from django.db.models.functions import Rank
 
 from .forms import BookForm, ReviewForm
 from .models import Book, Review
@@ -102,4 +103,38 @@ def top_rated_books(request):
 
     return render(request, 'books/top_rated_books.html', {
         'top_books': top_books
+    })
+
+def top_selling_books(request):
+    # Get the top 50 selling books
+    top_books = (
+        Book.objects
+        .annotate(total_sales=Sum('sales'))
+        .order_by('-total_sales')[:50]
+    )
+
+    # Annotate total sales for each author
+    for book in top_books:
+        author_total_sales = Book.objects.filter(author=book.author).aggregate(total_sales=Sum('sales'))['total_sales']
+        book.author_total_sales = author_total_sales
+
+        # Check if the book was among the top 5 selling books in its publication year
+        year = book.date_of_pub.year
+        top_books_in_year = (
+            Book.objects
+            .filter(date_of_pub__year=year)  # Use __year lookup for date fields
+            .annotate(total_sales=Sum('sales'))
+            .order_by('-total_sales')
+        )
+
+        # Annotate a ranking within its year
+        ranked_books = top_books_in_year.annotate(rank=Window(
+            expression=Rank(),
+            partition_by=[F('date_of_pub__year')],
+            order_by=F('total_sales').desc()
+        ))
+        book.rank_in_year = ranked_books.filter(id=book.id).first().rank
+
+    return render(request, 'books/top_selling_books.html', {
+        'top_books': top_books,
     })

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bookss</title>
+    <title>Books</title>
     <link rel="stylesheet" href="../../../static/css/styles.css">
 </head>
 <body>
 
     <h1>Books</h1>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
-    <a href="{% url 'books:top_rated_books' %}" class="add_new_row_btn">View top 10 books</a>
+    <a href="{% url 'books:top_rated_books' %}" class="add_new_row_btn">View top 10 rated books</a>
+    <a href="{% url 'books:top_selling_books' %}" class="add_new_row_btn">View top 50 selling books</a>
     <table>
     <thead>
         <tr>
@@ -26,7 +27,7 @@
             <td>{{ book.id }}</td>
             <td><a href="{% url 'books:book_detail' book.id %}">{{ book.name }}</a></td>
             <td>{{ book.summary }}</td>
-            <td>{{ book.date_of_pub }}</td>
+            <td>{{ book.pub_date }}</td>
             <td>{{ book.num_sales }}</td>
             </tr>
         {% endfor %}

@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:book_id>/review/<int:review_id>/delete/', views.review_delete, name='review_delete'),
 
     path('top-rated-books/', views.top_rated_books, name='top_rated_books'),
+    path('top-selling-books/', views.top_selling_books, name='top_selling_books'),
 ]
