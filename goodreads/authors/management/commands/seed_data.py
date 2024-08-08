@@ -19,7 +19,7 @@ class Command(BaseCommand):
         # 300 Books
 
         seeder.add_entity(Book, 300, {
-            'name': lambda x: seeder.faker.name(),
+            'name': lambda x: seeder.faker.catch_phrase(),
             'summary': lambda x: seeder.faker.paragraph(),
             'date_of_pub': lambda x: seeder.faker.date(),
             'num_sales': lambda x: seeder.faker.unique.random_int(min=10, max=1000000),

@@ -36,9 +36,8 @@ python manage.py migrate
 ## Run the Seed Script:
 ```
 python manage.py seed_data
-
-
 ```
+Sometimes the seed script does not work for all the data, so you can run it again and it will add the missing data.
 
 ## Local URL:
 ```
