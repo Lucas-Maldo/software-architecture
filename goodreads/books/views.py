@@ -1,22 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.db.models import Avg, Max, Min
 
 from .forms import BookForm, ReviewForm
 from .models import Book, Review
 
 def book_list(request):
-    books_list= Book.objects.order_by("-id")
+    books_list= Book.objects.all()
     context = {"books_list": books_list}
     return render(request, "books/book_list.html", context)
 
-# def book_detail(request, id):
-#     book = get_object_or_404(Book, pk=id)
-#     return render(request, "books/book_detail.html", {"book": book})
 
 def book_detail(request, id):
     book = get_object_or_404(Book, pk=id)
-    reviews = book.review_set.all()
+    reviews = book.reviews.all()
 
     return render(request, 'books/book_detail.html', {
         'book': book,
@@ -89,3 +87,19 @@ def review_delete(request, book_id, review_id):
         return HttpResponseRedirect(reverse("books:book_detail", args=(book.id,)))
 
     return render(request, 'books/review_delete.html', {'review': review, 'book': book})
+
+def top_rated_books(request):
+    # Get the top 10 books by average rating
+    top_books = (
+        Book.objects
+        .annotate(avg_score=Avg('reviews__score'))
+        .order_by('-avg_score')[:10]
+    )
+    for book in top_books:
+        # Annotate highest and lowest review scores for each book
+        book.highest_rated_review = book.reviews.order_by('-score').first()
+        book.lowest_rated_review = book.reviews.order_by('score').first()
+
+    return render(request, 'books/top_rated_books.html', {
+        'top_books': top_books
+    })

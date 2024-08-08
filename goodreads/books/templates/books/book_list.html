@@ -7,7 +7,8 @@
 <body>
 
     <h1>Books</h1>
-    
+    <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
+    <a href="{% url 'books:top_rated_books' %}" class="add_new_row_btn">View top 10 books</a>
     <table>
     <thead>
         <tr>

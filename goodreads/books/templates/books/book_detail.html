@@ -4,6 +4,7 @@
   <title>{{ book.name }}</title>
   <link rel="stylesheet" href="../../../static/css/styles.css">  </head>
 <body>
+  <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
   <div class="author-details">
     <h1>{{ book.name }}</h1>
     <p><strong>Author:</strong> {{ book.author.name }}</p>

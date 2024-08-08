@@ -1,33 +1,42 @@
-<h1>Authors</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Authors List</title>
+</head>
 <link rel="stylesheet" href="../../../static/css/styles.css">
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Date of Birth</th>
-      <th>Origin Country</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% if authors_list %}
-      {% for author in authors_list %}
-        <tr>
-          <td>{{ author.id }}</td>
-          <td><a href="{% url 'authors:author_detail' author.id %}">{{ author.name }}</a></td>
-          <td>{{ author.date_birth }}</td>
-          <td>{{ author.origin_country }}</td>
-          <td>{{ author.description }}</td>
-        </tr>
-      {% endfor %}
-    {% else %}
-      <tr>
-        <td colspan="5">No authors found.</td>
-      </tr>
-    {% endif %}
-  </tbody>
-</table>
+<body>
+    <h1>Authors List</h1>
+    <a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
+    <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
+    <form method="GET" action="{% url 'authors:index' %}">
+        <label for="filter_country">Filter by Country:</label>
+        <input type="text" id="filter_country" name="filter_country" value="{{ filter_country }}">
+        <button type="submit">Filter</button>
+    </form>
 
-<a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
-
+    <table>
+        <thead>
+            <tr>
+                <th><a href="?sort_by=name">Name</a></th>
+                <th><a href="?sort_by=number_of_books">Number of Books</a></th>
+                <th><a href="?sort_by=average_score">Average Score</a></th>
+                <th><a href="?sort_by=total_sales">Total Sales</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for author in authors %}
+                <tr>
+                    <td><a href="{% url 'authors:author_detail' author.id %}">{{ author.name }}</a></td>
+                    <td>{{ author.number_of_books    }}</td>
+                    <td>{{ author.average_score|floatformat:1 }}</td>
+                    <td>{{ author.total_sales }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No authors found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

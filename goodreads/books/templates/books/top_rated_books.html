@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Rated Books</title>
+    <link rel="stylesheet" href="../../../static/css/styles.css">
+</head>
+<body>
+    <h1>Top 10 Rated Books of All Time</h1>
+    <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Average Rating</th>
+                <th>Highest Rated Review</th>
+                <th>Lowest Rated Review</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in top_books %}
+                <tr>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.avg_score|floatformat:1 }}</td>
+                    <td>
+                        {% if book.highest_rated_review %}
+                            <strong>{{ book.highest_rated_review.reviewer_name }}:</strong>
+                            {{ book.highest_rated_review.review_text }} (Score: {{ book.highest_rated_review.score }})
+                        {% else %}
+                            No reviews
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if book.lowest_rated_review %}
+                            <strong>{{ book.lowest_rated_review.reviewer_name }}:</strong>
+                            {{ book.lowest_rated_review.review_text }} (Score: {{ book.lowest_rated_review.score }})
+                        {% else %}
+                            No reviews
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No books found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

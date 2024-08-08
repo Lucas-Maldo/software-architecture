@@ -4,6 +4,7 @@
     <title>{% if form.instance.pk %}Edit{% else %}New{% endif %} Author</title>
 </head>
 <body>
+    <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
     <h1>{% if form.instance.pk %}Edit{% else %}New{% endif %} Author</h1>
     <form method="post">
         {% csrf_token %}

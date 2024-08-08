@@ -17,6 +17,6 @@ class ReviewForm(forms.ModelForm):
 
     score = forms.IntegerField(
         min_value=1,
-        max_value=5,
+        max_value=10,
         widget=forms.NumberInput(attrs={'placeholder': 'Enter a score between 1 and 5'})
     )

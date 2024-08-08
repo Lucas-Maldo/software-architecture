@@ -10,4 +10,6 @@ urlpatterns = [
     path("new/", views.author_create, name="author_create"),
     path('edit/<int:id>/', views.author_update, name='author_update'),
     path('delete/<int:id>/', views.author_delete, name='author_delete'),
+
+    # path('author_list', views.author_list, name='author_list'),
 ]

@@ -8,15 +8,14 @@ class Book(models.Model):
     summary = models.TextField()
     date_of_pub = models.DateTimeField()
     num_sales = models.IntegerField(default=0)
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
 
     def __str__(self):
         return self.name + " " + self.summary
 
-
 class Review(models.Model):
     id = models.BigAutoField(primary_key=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='reviews')
     review = models.TextField()
     score = models.IntegerField()
     num_upvotes = models.IntegerField(default=0)
@@ -27,7 +26,7 @@ class Review(models.Model):
 
 class Sale(models.Model):
     id = models.BigAutoField(primary_key=True)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='sales')
     year = models.IntegerField(default=0)
     sales = models.IntegerField(default=0)
 
