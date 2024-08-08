@@ -1,11 +1,14 @@
 from django.db import models
 
+from authors.models import Author
+
 class Book(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.CharField(max_length=200)
     summary = models.TextField()
     date_of_pub = models.DateTimeField()
     num_sales = models.IntegerField(default=0)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name + " " + self.summary
