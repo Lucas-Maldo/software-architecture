@@ -33,6 +33,14 @@ python manage.py collectstatic
 python manage.py migrate
 ```
 
+## Run the Seed Script:
+```
+python manage.py seed_data
+
+python manage.py seed authors --number=30
+
+```
+
 ## Local URL:
 ```
 http://127.0.0.1:8000/

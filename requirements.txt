@@ -3,3 +3,4 @@ django
 psycopg
 psycopg2
 psycopg_binary
+faker
