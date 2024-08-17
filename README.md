@@ -1,6 +1,6 @@
 # Goodreads
 
-I recommend creating a virtual environment for django and postgres
+
 
 ## Virtual environment (Windows)
 Create virtual environment (be sure to create outside of the local repository):
@@ -17,23 +17,36 @@ To deactivate enviroment:
 deactivate
 ```
 
-## To initialize django aplication (Windows):
+### To initialize docker containers:
+To build docker:
+```
+docker-compose up --build
+```
+To quit docker:
+```
+Ctrl+C
+```
+To deconstruct docker:
+```
+docker-compose down
+```
+
+### To initialize django aplication (Windows):
 ```
 cd software-architecture/goodreads
 py manage.py runserver
 ```
-
-### if Css Not Working:
-```
-python manage.py collectstatic
-```
-
-## Apply migrations:
+#### Apply migrations:
 ```
 python manage.py migrate
 ```
 
-## Run the Seed Script:
+#### If css does not work:
+```
+python manage.py collectstatic
+```
+
+#### Run the Seed Script:
 ```
 python manage.py seed_data
 ```
@@ -59,11 +72,8 @@ DATABASES = {
         'NAME': 'Review_app_db',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',  # Set to 'localhost' or an IP address if the DB is remote
-        'PORT': '5432',  # Default is '5432'
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 ```
-
-## Progress:
-- [X] add postgresql
