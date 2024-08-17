@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,13 +81,24 @@ WSGI_APPLICATION = 'goodreads.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Review_app_db',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
-        'PORT': '5432',  # Default is '5432'
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'Review_app_db',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
+#         'PORT': '5432',  # Default is '5432'
+#     }
+# }
 
 
 # Password validation

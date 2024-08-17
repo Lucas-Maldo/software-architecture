@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="../../../static/css/styles.css">
 <body>
     <h1>Authors List</h1>
-    <a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
+    <a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
     <form method="GET" action="{% url 'authors:index' %}">
         <label for="filter_country">Filter by Country:</label>
         <input type="text" id="filter_country" name="filter_country" value="{{ filter_country }}">
