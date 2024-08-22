@@ -2,6 +2,30 @@
 
 
 
+
+### To initialize docker containers:
+Locate directory:
+```
+cd .\software-architecture\goodreads\
+```
+To build docker:
+```
+docker-compose up --build
+```
+To quit docker:
+```
+Ctrl+C
+```
+To deconstruct docker:
+```
+docker-compose down
+```
+
+### Application URL:
+```
+http://127.0.0.1:8000/
+```
+
 ## Virtual environment (Windows)
 Create virtual environment (be sure to create outside of the local repository):
 ```
@@ -17,19 +41,6 @@ To deactivate enviroment:
 deactivate
 ```
 
-### To initialize docker containers:
-To build docker:
-```
-docker-compose up --build
-```
-To quit docker:
-```
-Ctrl+C
-```
-To deconstruct docker:
-```
-docker-compose down
-```
 
 ### To initialize django aplication (Windows):
 ```
