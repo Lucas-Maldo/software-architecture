@@ -4,3 +4,4 @@ psycopg
 psycopg2
 psycopg_binary
 faker
+django-redis
