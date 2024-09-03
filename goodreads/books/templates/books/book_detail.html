@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+  {% load static %}
+
   <title>{{ book.name }}</title>
-  <link rel="stylesheet" href="../../../static/css/styles.css">  </head>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}"> </head>
 <body>
   <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
   <div class="author-details">

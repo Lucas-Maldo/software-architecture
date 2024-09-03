@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+  {% load static %}
+
 <head>
   <title>Delete {{ author.name }}</title>
-  <link rel="stylesheet" href="../../../static/css/styles.css">  </head>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">  </head>
 <body>
 
   <h1>Delete Confirmation</h1>

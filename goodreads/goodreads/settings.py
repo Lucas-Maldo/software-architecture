@@ -143,9 +143,31 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'static'
+SERVE_STATIC_FILES = os.getenv('DJANGO_SERVE_STATIC', 'False') == 'True'
 
+
+
+
+
+
+# URL to use when referring to static files located in STATIC_ROOT
+STATIC_URL = '/static/'
+
+# The absolute path to the directory where collectstatic will collect static files for deployment
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Additional locations the staticfiles app will traverse if the FileSystemFinder finder is enabled
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'authors/static'),  # Authors app static directory
+    os.path.join(BASE_DIR, 'books/static'),  # Books app static directory
+
+]
+
+# Default value for STATICFILES_FINDERS
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
 
 if os.getenv('REDIS_HOST'):
     CACHES = {

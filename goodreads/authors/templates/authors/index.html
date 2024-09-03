@@ -3,7 +3,9 @@
 <head>
     <title>Authors List</title>
 </head>
-<link rel="stylesheet" href="../../../static/css/styles.css">
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 <body>
     <h1>Authors List</h1>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
