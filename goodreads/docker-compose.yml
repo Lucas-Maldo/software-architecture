@@ -21,11 +21,15 @@ services:
       sh -c "python manage.py migrate && python manage.py seed_data && python manage.py seed_data && gunicorn goodreads.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/app
+      - static:/app/static
+      - media:/app/media
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
+
+
       
     environment:
       - DATABASE_NAME=Review_app_db
@@ -60,6 +64,8 @@ services:
       - web
 
 volumes:
+  static:
+  media:
   postgres_data:
   redis_data:
   caddy_data:

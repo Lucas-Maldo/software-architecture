@@ -1,4 +1,14 @@
-localhost {
-    reverse_proxy web:8000
-    
+http://127.0.0.1 {
+    handle /static/* {
+        root * /django-docker
+        file_server
+    }
+    handle /media/* {
+        root * /django-docker
+        file_server
+    }
+    handle {
+        reverse_proxy web:8000
+    }
+    log
 }
