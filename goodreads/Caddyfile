@@ -1,10 +1,10 @@
 localhost {
     handle /static/* {
-        root * /app
+        root * /app/static
         file_server
     }
     handle /media/* {
-        root * /app
+        root * /app/media
         file_server
     }
     handle {
