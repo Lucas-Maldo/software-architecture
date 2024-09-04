@@ -28,3 +28,4 @@ urlpatterns = [
 
 if settings.DEBUG or settings.SERVE_STATIC_FILES:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
