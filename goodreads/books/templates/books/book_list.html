@@ -7,6 +7,13 @@
 <body>
 
     <h1>Books</h1>
+
+    <br />
+    <!--Search Bar -->
+    <form method="GET" action="{% url 'books:book_list' %}">
+        <input type="text" name="search" placeholder="Search Book" value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
     <a href="{% url 'books:top_rated_books' %}" class="add_new_row_btn">View top 10 rated books</a>
     <a href="{% url 'books:top_selling_books' %}" class="add_new_row_btn">View top 50 selling books</a>

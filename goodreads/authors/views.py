@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.urls import reverse
 from django.core.cache import cache
 
+from .documents import AuthorDocument
+
 from .froms import AuthorForm
 from .models import Author
 
@@ -57,9 +59,22 @@ def index(request):
 
     sort_by = request.GET.get('sort_by', 'name')
     filter_country = request.GET.get('filter_country', '')
+    search_query = request.GET.get('search')
+
+    if search_query:
+        try:
+            name_search = AuthorDocument.search().query("match", name=search_query)
+            desc_search = AuthorDocument.search().query("match", description=search_query)
+            search_authors = name_search.to_queryset() | desc_search.to_queryset()
+            authors = search_authors
+            print("used elastic search")
+        except Exception as e:
+            print(e)
+            authors = Author.objects.filter(name__icontains=search_query) | Author.objects.filter(description__icontains=search_query)
+            print("used db")
 
     if filter_country:
-        authors = authors.filter(country_of_origin__icontains=filter_country)
+        authors = authors.filter(origin_country__icontains=filter_country)
 
     if sort_by in ['name', 'number_of_books', 'average_score', 'total_sales']:
         if sort_by == 'number_of_books':

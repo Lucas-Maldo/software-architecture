@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="../../../static/css/styles.css">
 <body>
     <h1>Authors List</h1>
+    <br />
+    <!-- search bar-->
+    <form method="GET" action="{% url 'authors:index' %}">
+        <input type="text" name="search" placeholder="Search Book" value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
     <a href="{% url 'authors:author_create' %}" class="add_new_row_btn">Add New Author</a>
     <form method="GET" action="{% url 'authors:index' %}">

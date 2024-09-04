@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from django.core.cache import cache
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_seed',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -82,24 +84,31 @@ WSGI_APPLICATION = 'goodreads.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': os.environ.get('DATABASE_HOST'),
+        'NAME': os.environ.get('DATABASE_NAME', 'Review_app_db'),
+        'USER': os.environ.get('DATABASE_USER', 'postgres'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'password'),
+        'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
         'PORT': os.environ.get('DATABASE_PORT', '5432'),
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'Review_app_db',
-#         'USER': 'postgres',
-#         'PASSWORD': 'password',
-#         'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
-#         'PORT': '5432',  # Default is '5432'
-#     }
-# }
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'Review_app_db',
+#        'USER': 'postgres',
+#        'PASSWORD': 'password',
+#        'HOST': '127.0.0.1',  # Set to 'localhost' or an IP address if the DB is remote
+#        'PORT': '5432',  # Default is '5432'
+#    }
+#}
+
+# Elasticsearch configuration from docker environment variables (ELASTICSEARCH_HOST, ELASTICSEARCH_PORT)
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://' + os.getenv('ELASTICSEARCH_HOST', 'localhost') + ':' + os.getenv('ELASTICSEARCH_PORT', '9200')
+    },
+}
 
 
 # Password validation

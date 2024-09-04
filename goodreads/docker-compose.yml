@@ -9,25 +9,47 @@ services:
       POSTGRES_DB: Review_app_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   web:
     build: .
     command: >
-      sh -c "python manage.py migrate && python manage.py seed_data && python manage.py seed_data && gunicorn goodreads.wsgi:application --bind 0.0.0.0:8000"
+      sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py seed_data && gunicorn goodreads.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - .:/app
       - static:/app/static
       - media:/app/media
     ports:
       - "8000:8000"
+
     depends_on:
       db:
         condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+    
 
 
       
@@ -39,6 +61,8 @@ services:
       - DATABASE_PORT=5432
       - REDIS_HOST=redis://redis
       - REDIS_PORT=6379
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
 
 
   redis:
@@ -47,6 +71,7 @@ services:
       - redis_data:/data
     ports:
       - "6379:6379"
+
 
 
 
@@ -60,8 +85,13 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+
     depends_on:
       - web
+
+
+
+    
 
 volumes:
   static:
@@ -70,3 +100,4 @@ volumes:
   redis_data:
   caddy_data:
   caddy_config:
+  esdata01:
