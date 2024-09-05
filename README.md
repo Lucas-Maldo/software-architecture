@@ -10,8 +10,9 @@ cd .\software-architecture\goodreads\
 ```
 To build docker:
 ```
-docker-compose up --build
+docker-compose -f docker-composeX.yml up --build
 ```
+with elasticsearch for some reason it works the third time you run the command, so you can run it again and it will work.
 To quit docker:
 ```
 Ctrl+C

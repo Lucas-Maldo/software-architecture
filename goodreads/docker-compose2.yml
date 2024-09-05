@@ -15,14 +15,30 @@ services:
       timeout: 5s
       retries: 5
 
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200"]
+      interval: 30s
+      timeout: 1s
+      retries: 5
+
+
   web:
     build: .
     command: >
       sh -c "python manage.py migrate && python manage.py seed_data && python manage.py seed_data && python manage.py collectstatic --noinput && gunicorn goodreads.wsgi:application --bind 0.0.0.0:8001"
     volumes:
       - .:/app
-      - goodreads_static:/app/static
-      - goodreads_media:/app/media
     ports:
       - "8001:8001"
     depends_on:
@@ -37,34 +53,11 @@ services:
       - DATABASE_PASSWORD=password
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
-      - REDIS_HOST=redis://redis
-      - REDIS_PORT=6379
       - DJANGO_SERVE_STATIC=False
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9200
 
-
-  redis:
-    image: redis:7
-    volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
-
-  caddy:
-    image: caddy:latest
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    depends_on:
-      - web
 
 volumes:
-  goodreads_static:
-  goodreads_media:
   postgres_data:
-  redis_data:
-  caddy_data:
-  caddy_config:
+  esdata01:

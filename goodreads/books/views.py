@@ -5,16 +5,35 @@ from django.db.models import Avg, Sum, F, Window
 from django.db.models.functions import Rank
 from django.core.cache import cache
 
+from .documents import BookDocument
+
+
+
 from .forms import BookForm, ReviewForm
 from .models import Book, Review
 
 def book_list(request):
+    query = request.GET.get('search')
+
     books_list = cache.get('books')
     if not books_list:
         books_list = Book.objects.all()
         cache.set('books', books_list, 60*60*24)
 
+    if query:
+        try:
+            title_search = BookDocument.search().query("match", name=query)
+            summary_search = BookDocument.search().query("match", summary=query)
+            books = title_search.to_queryset() | summary_search.to_queryset()
+            books_list = books.exclude(name__isnull=True).exclude(summary__isnull=True).distinct().order_by('name')
+            print("Used elastic search")
+        except Exception as e:
+            print(e)
+            books_list = Book.objects.filter(name__icontains=query) | Book.objects.filter(summary__icontains=query)
+            print("Used database search")
+    
     context = {"books_list": books_list}
+    cache.set('books', books_list, 60*60*24)
     return render(request, "books/book_list.html", context)
 
 

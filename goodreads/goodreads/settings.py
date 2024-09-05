@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_seed',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -141,7 +142,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SERVE_STATIC_FILES = os.getenv('DJANGO_SERVE_STATIC', 'False') == 'True'
 
 
-
+# Elasticsearch configuration from docker environment variables (ELASTICSEARCH_HOST, ELASTICSEARCH_PORT)
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://' + os.getenv('ELASTICSEARCH_HOST', 'localhost') + ':' + os.getenv('ELASTICSEARCH_PORT', '9200')
+    },
+}
 
 
 
