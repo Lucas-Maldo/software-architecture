@@ -13,6 +13,10 @@
     <p><strong>Publication Date:</strong> {{ book.date_of_pub }}</p>
     <p><strong>Sales:</strong> {{ book.num_sales }}</p>
     <p><strong>Summary:</strong> {{ book.summary }}</p>
+    {% if book.image %}
+      <img src="{{ book.image.url }}" alt="https://picsum.photos/200">  
+    {% endif %}
+    
   </div>
 
   <h2>Reviews</h2>

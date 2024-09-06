@@ -52,7 +52,7 @@ def book_detail(request, id):
 
 def book_create(request):
     if request.method == "POST":
-        form = BookForm(request.POST)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             book = form.save()
             cache.delete('books')
@@ -67,7 +67,7 @@ def book_create(request):
 def book_update(request, id):
     book = get_object_or_404(Book, pk=id)
     if request.method == "POST":
-        form = BookForm(request.POST, instance=book)
+        form = BookForm(request.POST, request.FILES, instance=book)
         if form.is_valid():
             book = form.save()
             cache.delete('books')
@@ -207,3 +207,15 @@ def top_selling_books(request):
     return render(request, 'books/top_selling_books.html', {
         'top_books': top_selling_books,
     })
+
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Handle a successful upload, redirect, or return response
+            return HttpResponseRedirect(reverse("books:book_list"))
+    else:
+        form = MyModelForm()
+    return render(request, 'upload.html', {'form': form})

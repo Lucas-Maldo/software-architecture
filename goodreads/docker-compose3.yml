@@ -51,6 +51,8 @@ services:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
+      - goodreads_static:/app/static
+      - goodreads_media:/app/media
     depends_on:
       - web
 

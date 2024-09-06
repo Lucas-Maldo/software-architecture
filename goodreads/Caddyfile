@@ -1,10 +1,9 @@
 localhost {
+	root * /app
 	handle /static/* {
-		root * goodreads/static/
 		file_server browse
 	}
 	handle /media/* {
-		root * media/
 		file_server browse
 	}
 	handle {

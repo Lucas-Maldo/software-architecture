@@ -7,3 +7,4 @@ faker
 django-redis
 gunicorn
 django_elasticsearch_dsl
+Pillow

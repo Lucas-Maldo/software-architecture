@@ -8,7 +8,7 @@
 <body>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
     <h1>Create Review for "{{ book.name }}"</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit Review</button>

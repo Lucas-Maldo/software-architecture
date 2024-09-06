@@ -9,6 +9,7 @@ class Book(models.Model):
     date_of_pub = models.DateTimeField()
     num_sales = models.IntegerField(default=0)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.name + " " + self.summary

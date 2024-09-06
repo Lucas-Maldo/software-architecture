@@ -6,7 +6,7 @@
 <body>
     <a href="{% url 'home' %}" class="add_new_row_btn">Go to Homepage</a>
     <h1>{% if form.instance.pk %}Edit{% else %}New{% endif %} Author</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Save</button>

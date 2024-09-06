@@ -12,6 +12,10 @@
     <p><strong>Birth Date:</strong> {{ author.date_birth }}</p>
     <p><strong>Country of Origin:</strong> {{ author.origin_country }}</p>
     <p><strong>Description:</strong> {{ author.description }}</p>
+    {% if author.image %}
+      <img src="{{ author.image.url }}" alt="https://picsum.photos/200">  
+    {% endif %}
+
   </div>
 
   <div class="actions">

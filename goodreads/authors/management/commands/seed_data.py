@@ -15,6 +15,7 @@ class Command(BaseCommand):
             'date_birth': lambda x: seeder.faker.date_of_birth(),
             'origin_country': lambda x: seeder.faker.country(),
             'description': lambda x: seeder.faker.paragraph(),
+            'image': ''
         })
         # 300 Books
 
@@ -23,7 +24,8 @@ class Command(BaseCommand):
             'summary': lambda x: seeder.faker.paragraph(),
             'date_of_pub': lambda x: seeder.faker.date(),
             'num_sales': lambda x: seeder.faker.unique.random_int(min=10, max=1000000),
-            'author': lambda x: Author.objects.get(pk=seeder.faker.random_int(min=1, max=50))
+            'author': lambda x: Author.objects.get(pk=seeder.faker.random_int(min=1, max=50)),
+            'image':  ''
         })
 
         # 1-10 reviews per book

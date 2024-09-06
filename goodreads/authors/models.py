@@ -7,6 +7,7 @@ class Author(models.Model):
     date_birth = models.DateField()
     origin_country = models.CharField(max_length=200)
     description = models.TextField()
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
         return self.name

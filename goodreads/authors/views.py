@@ -13,7 +13,7 @@ def author_detail(request, author_id):
 
 def author_create(request):
     if request.method == "POST":
-        form = AuthorForm(request.POST)
+        form = AuthorForm(request.POST, request.FILES)
         if form.is_valid():
             author = form.save()
             cache.delete('authors')
@@ -28,7 +28,7 @@ def author_update(request, id):
     
 
     if request.method == "POST":
-        form = AuthorForm(request.POST, instance=author)
+        form = AuthorForm(request.POST, request.FILES, instance=author, )
         if form.is_valid():
             author = form.save()
             cache.delete('authors')
